@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# script/bootstrap: Resolve all dependencies that the application requires to
+#                   run.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+command -v docker >/dev/null 2>&1 || { echo >&2 "You should be able to run docker command but it's not installed. Aborting."; exit 1; }

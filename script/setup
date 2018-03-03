@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# script/setup: Set up application for the first time after cloning, or set it
+#
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+script/bootstrap
+
+# get first FROM argument from Dockerfile
+# image_version=$(cat Dockerfile | grep "FROM" | head -n1 | cut -d' ' -f 2)
+# docker pull $image_version
+
+git submodule update --init
