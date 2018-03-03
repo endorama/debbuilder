@@ -15,13 +15,13 @@ On first clone
 .
 ├── build-environment.sh
 ├── build.sh
-├── dist					contains built .deb files
-├── lastpass-cli			package folder
-│   ├── description-pak		description as used by checkinstall
-│   └── ubuntu-xenial		package platform folder
-│       ├── build.sh 		actual build script
-│       ├── Dockerfile 		build environment dockerfile
-│       └── release			count releases
+├── dist                    contains built .deb files
+├── lastpass-cli            package folder
+│   ├── description-pak     description as used by checkinstall
+│   └── ubuntu-xenial       package platform folder
+│       ├── build.sh        actual build script
+│       ├── Dockerfile      build environment dockerfile
+│       └── release         count releases
 ├── README.md
 └── script
 
