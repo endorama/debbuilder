@@ -1,6 +1,6 @@
 # Dockerfile for build environment for ubuntu xenial
 
-FROM ubuntu:xenial-20180123
+FROM ubuntu:xenial-20180228
 
 # Set the env variables to non-interactive
 ENV DEBIAN_FRONTEND noninteractive
@@ -14,5 +14,11 @@ RUN apt-get update -q
 RUN apt-get install -y openssl libcurl4-openssl-dev libxml2 libssl-dev libxml2-dev pinentry-curses xclip cmake build-essential pkg-config
 ## lastpass docs required packages
 RUN apt-get install -y asciidoc xsltproc
-## poor's man packager
-RUN apt-get install -y checkinstall
+## packager
+RUN apt-get install -y sudo git-buildpackage dh-make
+## gpg
+RUN apt-get -y install gnupg2
+
+RUN useradd -ms /bin/bash builder
+
+USER builder
