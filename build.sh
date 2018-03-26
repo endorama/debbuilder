@@ -4,26 +4,26 @@ set -euo pipefail
 
 package=$1
 platform=$2
-version=${3:-"v1.2.2"}
+version=$3
 
-echo "Building lastpass-cli version ${version} for ${platform}"
+release_file="./${package}/${platform}/release-${version}"
 
-pushd "${package}/src"
-git checkout $version
-popd
-
-release=$(cat ./${package}/${platform}/release)
+release=$(cat ${release_file} 2>/dev/null || true)
+release=${release:-0}
 release=$(($release + 1))
 
-docker run \
-	-v $(pwd):/buildroot\
-	-e LASTPASS_VERSION="${version}" \
-	-e PACKAGE_RELEASE_NUMBER="${release}" \
-	--rm \
-	-i \
-	-t "debbuilder-lastpass-cli:${platform}" \
-	/bin/bash -c "/buildroot/${platform}/build.sh"
+echo "Building ${package} version ${version} (0ubuntu${release}) for ${platform}"
 
-echo $release > "./${platform}/release"
+docker run \
+	-v ${HOME}/.gnupg/:/home/builder/.gnupg/:ro \
+    -v /run/user/$(id -u)/:/run/user/$(id -u)/:ro \
+	-v $(pwd):/buildroot \
+	-e PACKAGE_VERSION="${version}" \
+	-e PACKAGE_RELEASE_NUMBER="${release}" \
+	--rm -i \
+	-t "debbuilder-${package}-${platform}" \
+	/bin/bash -c "/buildroot/${package}/${platform}/build.sh"
+
+echo $release > ${release_file}
 
 echo "Build done"
