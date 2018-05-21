@@ -9,9 +9,11 @@ tag=$(date +%Y%m%d%H%M%S)
 
 docker rmi "debbuilder-${package}-${platform}:latest"
 
+cd "${package}/${platform}"
+
 docker build \
 	--tag "debbuilder-${package}-${platform}:${tag}" \
 	--tag "debbuilder-${package}-${platform}:latest" \
-	--file "${package}/${platform}/Dockerfile" \
+	--file "Dockerfile" \
 	--rm --compress \
-	${package}
+	.
