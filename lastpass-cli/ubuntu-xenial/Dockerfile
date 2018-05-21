@@ -19,6 +19,8 @@ RUN apt-get install -y sudo git-buildpackage dh-make
 ## gpg
 RUN apt-get -y install gnupg2
 
+COPY devscripts.conf /etc/devscripts.conf
+
 RUN useradd -ms /bin/bash builder
 
 USER builder
