@@ -21,6 +21,7 @@ docker run \
 	-v $(pwd):/buildroot \
 	-e PACKAGE_VERSION="${version}" \
 	-e PACKAGE_RELEASE_NUMBER="${release}" \
+	-e GPG_AGENT_INFO="~/.gnupg/S.gpg-agent:0:1" \
 	--rm -i \
 	-t "debbuilder-${package}-${platform}" \
 	/bin/bash -c "/buildroot/${package}/${platform}/build.sh"
