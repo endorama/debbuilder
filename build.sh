@@ -17,7 +17,7 @@ echo "Building ${package} version ${version} (0ubuntu${release}) for ${platform}
 docker run \
 	-u $(id -u):$(id -g) \
 	-v ${HOME}/.gnupg/:/home/builder/.gnupg/:ro \
-    -v /run/user/$(id -u)/:/run/user/$(id -u)/:ro \
+	-v /run/user/$(id -u)/:/run/user/$(id -u)/:ro \
 	-v $(pwd):/buildroot \
 	-e PACKAGE_VERSION="${version}" \
 	-e PACKAGE_RELEASE_NUMBER="${release}" \
