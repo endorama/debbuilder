@@ -7,7 +7,7 @@ platform=$2
 
 tag=$(date +%Y%m%d%H%M%S)
 
-docker rmi "debbuilder-${package}-${platform}:latest"
+docker rmi "debbuilder-${package}-${platform}:latest" || true
 
 cd "${package}/${platform}"
 
